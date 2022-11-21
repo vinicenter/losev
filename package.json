@@ -1,0 +1,44 @@
+{
+  "name": "losev",
+  "version": "0.0.0",
+  "main": "electron.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "APP_DEV=true electron .",
+    "build": "node ./build.js"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.15.5",
+    "http-server": "^14.1.1",
+    "quasar": "^2.10.2",
+    "sass": "^1.56.1",
+    "sudo-prompt": "^9.2.1",
+    "vite": "^3.2.3",
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@quasar/vite-plugin": "^1.2.3",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "electron": "^21.3.0",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.vini.center.losev",
+    "productName": "Losev",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "preload.js",
+      "electron.js"
+    ],
+    "linux": {
+      "category": "Utility",
+      "target": [
+        "AppImage"
+      ]
+    }
+  }
+}
