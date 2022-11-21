@@ -1,27 +1,17 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const vite = require('vite');
-const httpServer = require('http-server');
+const vite = require(path.join(__dirname, 'node_modules/vite/index.cjs'));
 
 const startViteServer = async () => {
 	if(process.env.APP_DEV) {
 		const server = await vite.createServer();
-		server.listen();
+		await server.listen();
 
-		return 'http://localhost:5173';
+		return `http://localhost:${server.config.server.port}`;
 	} else {
-		httpServer.createServer({
-				root: path.join(__dirname, 'dist'),
-		}).listen(3024);
-		// vite doesn't works on build (we don't know why yeat), so we use http-server for that
-		//
-		// await vite.preview({
-		//     preview: {
-		//         port: 3024,
-		//     }
-		// })
+		const server = await vite.preview();
 
-		return 'http://localhost:3024';
+		return `http://localhost:${server.config.preview.port}`;
 	}
 }
 
@@ -34,7 +24,7 @@ app.on('ready', async () => {
 		width: 380,
 		height: 600,
 		autoHideMenuBar: true,
-		resizable: true,
+		resizable: false,
 		icon: path.join(__dirname, 'public/losev-logo-x256.png'),
 		webPreferences: {
 			nodeIntegration: true,
