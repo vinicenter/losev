@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.15.5",
-    "http-server": "^14.1.1",
     "quasar": "^2.10.2",
     "sass": "^1.56.1",
     "sudo-prompt": "^9.2.1",
